@@ -1,0 +1,35 @@
+import heapq
+
+def dijkstra(graph, start):
+    distances = {node: float('inf') for node in graph}
+    distances[start] = 0
+
+    pq = [(0, start)]
+
+    while pq:
+        cost, current = heapq.heappop(pq)
+
+        if cost > distances[current]:
+            continue
+
+        for neighbor, weight in graph[current]:
+            new_cost = cost + weight
+
+            if new_cost < distances[neighbor]:
+                distances[neighbor] = new_cost
+                heapq.heappush(pq, (new_cost, neighbor))
+
+    print("Minimum Transportation Costs:")
+
+    for location, cost in distances.items():
+        print(location, ":", cost)
+
+
+graph = {
+    'A': [('B', 4), ('C', 2)],
+    'B': [('A', 4), ('C', 1), ('D', 5)],
+    'C': [('A', 2), ('B', 1), ('D', 8)],
+    'D': [('B', 5), ('C', 8)]
+}
+
+dijkstra(graph, 'A')
