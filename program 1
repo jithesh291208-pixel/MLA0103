@@ -1,0 +1,32 @@
+from collections import deque
+
+def bfs(graph, start):
+    visited = set()
+    queue = deque([start])
+
+    visited.add(start)
+
+    print("Robot Visiting Order:")
+
+    while queue:
+        room = queue.popleft()
+        print("Room", room)
+
+        for neighbor in graph[room]:
+            if neighbor not in visited:
+                visited.add(neighbor)
+                queue.append(neighbor)
+
+    print("All reachable rooms visited successfully!")
+
+# Building room connections
+graph = {
+    1: [2, 3],
+    2: [1, 4, 5],
+    3: [1, 5],
+    4: [2],
+    5: [2, 3]
+}
+
+# Start from Room 1
+bfs(graph, 1)
