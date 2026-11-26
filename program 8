@@ -1,0 +1,39 @@
+def alphabeta(depth, node, maximizing, alpha, beta):
+    if depth == 0:
+        return node
+
+    if maximizing:
+        best = -float('inf')
+
+        for value in [3, 5, 6]:
+            score = alphabeta(depth - 1, value,
+                              False, alpha, beta)
+            best = max(best, score)
+            alpha = max(alpha, best)
+
+            if beta <= alpha:
+                break
+
+        return best
+
+    else:
+        best = float('inf')
+
+        for value in [2, 4, 1]:
+            score = alphabeta(depth - 1, value,
+                              True, alpha, beta)
+            best = min(best, score)
+            beta = min(beta, best)
+
+            if beta <= alpha:
+                break
+
+        return best
+
+
+result = alphabeta(
+    2, 0, True,
+    -float('inf'), float('inf')
+)
+
+print("Best Game Score:", result)
