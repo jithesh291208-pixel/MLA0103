@@ -1,0 +1,24 @@
+def dfs(graph, start, visited):
+    visited.add(start)
+    print("Exploring:", start)
+
+    for neighbor in graph[start]:
+        if neighbor not in visited:
+            dfs(graph, neighbor, visited)
+
+# Cave connections
+graph = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F'],
+    'D': [],
+    'E': ['F'],
+    'F': []
+}
+
+visited = set()
+
+print("Rescue Drone Cave Exploration:")
+dfs(graph, 'A', visited)
+
+print("Exploration Completed!")
